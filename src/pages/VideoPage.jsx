@@ -9,18 +9,21 @@ function VideoPage() {
 
   useEffect(() => {
     async function fetchVideo() {
-      const docRef = doc(db, "videos", id);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setVideo(docSnap.data());
+      try {
+        const docRef = doc(db, "videos", id);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setVideo(docSnap.data());
+        }
+      } catch (error) {
+        console.error("Error loading video:", error);
       }
     }
 
     fetchVideo();
   }, [id]);
 
-  if (!video) return <p>Loading...</p>;
+  if (!video) return <p className="loading-text">Loading...</p>;
 
   const isEmbed =
     video.videoUrl.includes("youtube.com") ||
@@ -28,38 +31,28 @@ function VideoPage() {
 
   return (
     <div className="video-page">
-      <button
-        onClick={() => navigate("/")}
-        style={{
-          marginBottom: "1rem",
-          padding: "0.5rem 1rem",
-          backgroundColor: "#202020",
-          color: "white",
-          border: "none",
-          borderRadius: "4px",
-          cursor: "pointer",
-        }}
-      >
+      <button className="back-button" onClick={() => navigate("/")}>
         ← Back to Home
       </button>
 
-      {isEmbed ? (
-        <iframe
-          width="100%"
-          height="400"
-          src={video.videoUrl}
-          title={video.title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-      ) : (
-        <video width="100%" height="400" controls>
-          <source src={video.videoUrl} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      )}
-      <h2>{video.title}</h2>
-      <p>{video.description}</p>
+      <div className="video-wrapper">
+        {isEmbed ? (
+          <iframe
+            src={video.videoUrl}
+            title={video.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        ) : (
+          <video controls>
+            <source src={video.videoUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )}
+      </div>
+
+      <h2 className="video-title">{video.title}</h2>
+      <p className="video-description">{video.description}</p>
     </div>
   );
 }

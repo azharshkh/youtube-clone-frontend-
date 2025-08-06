@@ -1,73 +1,18 @@
+/* === Base Styles === */
 body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f8f8f8;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.header {
-  background-color: #202020;
-  color: white;
-  padding: 1rem;
-}
-
-.logo {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-
-.home-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding: 1rem;
-  justify-content: center;
-}
-
-.video-card {
-  width: 300px;
-  background-color: white;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.thumbnail {
-  width: 100%;
-  display: block;
-}
-
-.title {
-  margin: 0.5rem;
-  font-size: 1rem;
-  color: #333;
-}
-
-.video-page {
-  padding: 1rem;
-}
-
-.video-page video {
-  width: 100%;
-  max-width: 800px;
-}
-
-.video-page h2 {
-  margin-top: 1rem;
-  font-size: 1.5rem;
-}
-
-.video-page p {
-  margin-top: 0.5rem;
-  color: #555;
-}
 button {
   font-size: 1rem;
+  cursor: pointer;
 }
-/* === Theme Styles === */
 
+/* === Theme Styles === */
 .theme-light {
   background-color: #f8f8f8;
   color: #000;
@@ -89,15 +34,183 @@ button {
   font-family: "Courier New", monospace;
 }
 
-/* Optional: Header-specific styling */
-.theme-dark .header {
+/* Theme-specific header styles */
+.theme-dark .header,
+.theme-dark .yt-header {
   background-color: #1c1c1c;
   color: white;
 }
-.theme-youtubeRed .header {
+
+.theme-youtubeRed .header,
+.theme-youtubeRed .yt-header {
   background-color: #cc0000;
+  color: white;
 }
-.theme-retro .header {
+
+.theme-retro .header,
+.theme-retro .yt-header {
   background-color: #d9c5b2;
   color: #000;
+}
+
+/* === Home & Search Pages === */
+.home-container,
+.search-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  justify-content: center;
+}
+
+.video-card {
+  width: 300px;
+  background-color: white;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.video-card:hover {
+  transform: scale(1.03);
+}
+
+.theme-dark .video-card {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.theme-youtubeRed .video-card {
+  background-color: #b30000;
+  color: white;
+}
+
+.theme-retro .video-card {
+  background-color: #fff3e6;
+  color: #2c2c2c;
+}
+
+.thumbnail {
+  width: 100%;
+  display: block;
+}
+
+.title {
+  margin: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.theme-dark .title,
+.theme-youtubeRed .title {
+  color: #fff;
+}
+
+.theme-retro .title {
+  color: #2c2c2c;
+}
+
+/* === Video Page === */
+.video-page {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+.video-page video,
+.video-page iframe {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 4px;
+}
+
+.video-page h2 {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.video-page p {
+  margin-top: 0.5rem;
+  max-width: 800px;
+  text-align: center;
+  color: #555;
+}
+
+.theme-dark .video-page p {
+  color: #ccc;
+}
+.theme-youtubeRed .video-page p {
+  color: #f0f0f0;
+}
+.theme-retro .video-page p {
+  color: #2c2c2c;
+}
+
+/* === Buttons === */
+.back-button {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #202020;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.theme-dark .back-button {
+  background-color: #333;
+}
+.theme-youtubeRed .back-button {
+  background-color: #b30000;
+}
+.theme-retro .back-button {
+  background-color: #c9a87a;
+  color: #000;
+}
+
+/* === Responsive Enhancements === */
+@media (max-width: 768px) {
+  .video-card {
+    width: 100%;
+    max-width: 90vw;
+  }
+
+  .video-page video,
+  .video-page iframe {
+    max-width: 100%;
+  }
+}
+
+.search-grid {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem 0;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+@media (max-width: 500px) {
+  .search-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .video-card iframe {
+    height: 180px;
+  }
+
+  .video-page h2 {
+    font-size: 1.2rem;
+  }
+
+  .video-page p {
+    font-size: 0.9rem;
+  }
+}
+
+.loading-text {
+  text-align: center;
+  padding: 2rem;
 }

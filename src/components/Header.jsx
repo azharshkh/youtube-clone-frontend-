@@ -1,10 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { ThemeContext } from "../App"; // Import context from App
 import "./Header.css";
 
 function Header() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+  const { theme, setTheme } = useContext(ThemeContext);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -12,6 +14,8 @@ function Header() {
       navigate(`/search?q=${encodeURIComponent(query)}`);
     }
   };
+
+  const themes = ["light", "dark", "youtubeRed", "retro"];
 
   return (
     <header className="yt-header">
@@ -35,7 +39,17 @@ function Header() {
       </form>
 
       <div className="yt-right">
-        {/* Future: Add icons like upload, account, etc. */}
+        <select
+          value={theme}
+          onChange={(e) => setTheme(e.target.value)}
+          className="yt-theme-select"
+        >
+          {themes.map((t) => (
+            <option key={t} value={t}>
+              {t}
+            </option>
+          ))}
+        </select>
       </div>
     </header>
   );

@@ -6,6 +6,9 @@
   padding: 0.5rem 1rem;
   color: white;
   flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .yt-logo {
@@ -45,14 +48,40 @@
   background-color: #383838;
 }
 
-@media (max-width: 600px) {
-  .yt-search-form {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
+.yt-theme-toggle {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  margin-left: 1rem;
+}
 
+.yt-theme-toggle:hover {
+  background-color: #383838;
+}
+
+.yt-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* === Responsive Header === */
+@media (max-width: 600px) {
   .yt-header {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .yt-search-form {
+    width: 100%;
+    margin: 0;
+  }
+
+  .yt-theme-toggle {
+    margin-left: 0;
+    align-self: flex-end;
   }
 }

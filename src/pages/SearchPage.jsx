@@ -14,12 +14,7 @@ function SearchPage() {
       try {
         const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
         const data = await res.json();
-
-        if (Array.isArray(data)) {
-          setResults(data);
-        } else {
-          setResults([]);
-        }
+        setResults(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error("Search error:", err);
         setResults([]);
@@ -32,8 +27,8 @@ function SearchPage() {
   }, [query]);
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <h2>
+    <main style={{ padding: "1rem" }}>
+      <h2 style={{ marginBottom: "1rem" }}>
         Search Results for: <em>{query}</em>
       </h2>
 
@@ -45,32 +40,22 @@ function SearchPage() {
         </p>
       )}
 
-      <div
-        style={{
-          display: "grid",
-          gap: "1rem",
-          gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-        }}
-      >
+      <div className="search-grid">
         {results.map((item) => (
-          <div
-            key={item.id.videoId}
-            style={{ border: "1px solid #ccc", padding: "0.5rem" }}
-          >
+          <div key={item.id.videoId} className="video-card">
             <iframe
               width="100%"
               height="150"
               src={`https://www.youtube.com/embed/${item.id.videoId}`}
               title={item.snippet.title}
               allowFullScreen
+              style={{ border: "none", borderRadius: "6px" }}
             ></iframe>
-            <p>
-              <strong>{item.snippet.title}</strong>
-            </p>
+            <p className="title">{item.snippet.title}</p>
           </div>
         ))}
       </div>
-    </div>
+    </main>
   );
 }
 

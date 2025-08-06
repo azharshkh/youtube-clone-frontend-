@@ -7,23 +7,31 @@ function HomePage() {
 
   useEffect(() => {
     async function fetchVideos() {
-      const querySnapshot = await getDocs(collection(db, "videos"));
-      const videoList = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setVideos(videoList);
+      try {
+        const querySnapshot = await getDocs(collection(db, "videos"));
+        const videoList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setVideos(videoList);
+      } catch (error) {
+        console.error("Failed to fetch videos:", error);
+      }
     }
 
     fetchVideos();
   }, []);
 
   return (
-    <div className="home-container">
-      {videos.map((video) => (
-        <VideoCard key={video.id} video={video} />
-      ))}
-    </div>
+    <main className="home-container">
+      {videos.length === 0 ? (
+        <p style={{ padding: "1rem", textAlign: "center" }}>
+          No videos available.
+        </p>
+      ) : (
+        videos.map((video) => <VideoCard key={video.id} video={video} />)
+      )}
+    </main>
   );
 }
 
