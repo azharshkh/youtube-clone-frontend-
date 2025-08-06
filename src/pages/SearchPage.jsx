@@ -12,7 +12,7 @@ function SearchPage() {
 
       setLoading(true);
       try {
-        const res = await fetch(`http://localhost:4000/api/search?q=${query}`);
+        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
         const data = await res.json();
 
         if (Array.isArray(data)) {
