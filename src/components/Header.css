@@ -1,0 +1,58 @@
+.yt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #202020;
+  padding: 0.5rem 1rem;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.yt-logo {
+  color: #ff0000;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.yt-search-form {
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  margin: 0 1rem;
+}
+
+.yt-search-input {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 2px 0 0 2px;
+  background-color: #121212;
+  color: white;
+  outline: none;
+}
+
+.yt-search-btn {
+  padding: 0.5rem 1rem;
+  background-color: #303030;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 0 2px 2px 0;
+}
+
+.yt-search-btn:hover {
+  background-color: #383838;
+}
+
+@media (max-width: 600px) {
+  .yt-search-form {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .yt-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
