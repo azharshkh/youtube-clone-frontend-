@@ -66,3 +66,38 @@ body {
 button {
   font-size: 1rem;
 }
+/* === Theme Styles === */
+
+.theme-light {
+  background-color: #f8f8f8;
+  color: #000;
+}
+
+.theme-dark {
+  background-color: #121212;
+  color: #fff;
+}
+
+.theme-youtubeRed {
+  background-color: #ff0000;
+  color: #fff;
+}
+
+.theme-retro {
+  background-color: #f4e2d8;
+  color: #2c2c2c;
+  font-family: "Courier New", monospace;
+}
+
+/* Optional: Header-specific styling */
+.theme-dark .header {
+  background-color: #1c1c1c;
+  color: white;
+}
+.theme-youtubeRed .header {
+  background-color: #cc0000;
+}
+.theme-retro .header {
+  background-color: #d9c5b2;
+  color: #000;
+}
